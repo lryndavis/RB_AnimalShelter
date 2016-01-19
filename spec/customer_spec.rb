@@ -1,14 +1,4 @@
-require('rspec')
-require('pg')
-require('customer')
-
-DB = PG.connect({:dbname => 'shelter_test'})
-
-RSpec.configure do |config|
-  config.after(:each) do
-    DB.exec("DELETE FROM customers *;")
-  end
-end
+require('spec_helper')
 
 describe(Customer) do
   describe(".all") do
@@ -19,14 +9,14 @@ describe(Customer) do
 
   describe("#name") do
     it("tells you its name") do
-      customer = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue" :id => nil})
+      customer = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue", :id => nil})
       expect(customer.name()).to(eq("Greg"))
     end
   end
 
   describe("#id") do
     it("sets its ID when you save it") do
-      customer = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue" :id => nil})
+      customer = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue", :id => nil})
       customer.save()
       expect(customer.id()).to(be_an_instance_of(Fixnum))
     end
@@ -34,7 +24,7 @@ describe(Customer) do
 
   describe("#save") do
     it("lets you save customers to the database") do
-      customer = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue" :id => nil})
+      customer = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue", :id => nil})
       customer.save()
       expect(Customer.all()).to(eq([customer]))
     end
@@ -42,8 +32,8 @@ describe(Customer) do
 
   describe("#==") do
     it("is the same customer if it has the same name") do
-      customer1 = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue" :id => nil})
-      customer2 = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue" :id => nil})
+      customer1 = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue", :id => nil})
+      customer2 = Customer.new({:name => "Greg", :phone => "555-555-5555", :type_preference => "cat", :breed_preference => "Russian Blue", :id => nil})
       expect(customer1).to(eq(customer2))
     end
   end

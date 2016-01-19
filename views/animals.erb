@@ -1,0 +1,22 @@
+<h1>Currently Available Animals:</h1>
+
+<% if @animals.any?() %>
+
+  <ul>
+    <% @animals.each() do |animal| %>
+        <%= animal.name() %>
+        <%= animal.gender() %>
+        <%= animal.admittance_date() %>
+        <%= animal.type() %>
+        <%= animal.breed() %>
+        <br>
+    <% end %>
+  </ul>
+
+  <% else %>
+
+  <p>
+    There are no animals available!
+  </p>
+
+  <% end %>

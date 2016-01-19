@@ -18,14 +18,19 @@ class Animal
       returned_animals = DB.exec("SELECT * FROM animals;")
       animals = []
       returned_animals.each() do |animal|
-        description = animal.fetch("name")
-        animals.push(Animal.new({:name => name}))
+        name = animal.fetch("name")
+        gender = animal.fetch("gender")
+        admittance_date = animal.fetch("admittance_date")
+        type = animal.fetch("type")
+        breed = animal.fetch("breed")
+        cust_id = animal.fetch("cust_id").to_i()
+        animals.push(Animal.new({:name => name, :gender => gender, :admittance_date => admittance_date, :type => type, :breed => breed, :cust_id => cust_id}))
       end
       animals
     end
 
     define_method(:save) do
-      DB.exec("INSERT INTO animals (name, gender, admittance_date, type, breed) VALUES ('#{@name}', '#{@gender}', '#{@admittance_date}', '#{@type}', '#{@breed}');")
+      DB.exec("INSERT INTO animals (name, gender, admittance_date, type, breed, cust_id) VALUES ('#{@name}', '#{@gender}', '#{@admittance_date}', '#{@type}', '#{@breed}', #{@cust_id.to_i});")
     end
 
 end
