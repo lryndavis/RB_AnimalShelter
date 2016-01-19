@@ -16,6 +16,10 @@ get("/animals/new") do
   erb(:animal_form)
 end
 
+get("/customers/new") do
+  erb(:customers_form)
+end
+
 post("/animals") do
   name = params.fetch("name")
   gender = params.fetch("gender")
@@ -27,7 +31,23 @@ post("/animals") do
   erb(:index)
 end
 
+post("/customers") do
+  name = params.fetch("name")
+  phone = params.fetch("phone")
+  type_preference = params.fetch("type_preference")
+  breed_preference = params.fetch("breed_preference")
+  id = params.fetch("id")
+  customer = Customer.new({:name => name, :phone => phone, :type_preference => type_preference, :breed_preference => breed_preference, :id => nil})
+  customer.save()
+  erb(:index)
+end
+
 get('/animals') do
   @animals = Animal.all()
   erb(:animals)
+end
+
+get('/customers') do
+  @customers = Customer.all()
+  erb(:customers)
 end
