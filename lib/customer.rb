@@ -9,6 +9,10 @@ class Customer
     @id = attributes.fetch(:id)
   end
 
+  define_singleton_method(:cust_breed_sort) do
+    sorted_breed_preference = DB.exec("SELECT * FROM customers ORDER BY breed_preference ASC;")
+  end
+
   define_singleton_method(:all) do
     returned_customers = DB.exec("SELECT * FROM customers;")
     customers = []

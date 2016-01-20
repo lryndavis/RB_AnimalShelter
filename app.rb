@@ -35,6 +35,11 @@ get("/animals/breed") do
   erb(:sort_breed)
 end
 
+get("/customers/breed") do
+  @customers = Customer.cust_breed_sort()
+  erb(:cust_sort_breed)
+end
+
 post("/animals") do
   name = params.fetch("name")
   gender = params.fetch("gender")
