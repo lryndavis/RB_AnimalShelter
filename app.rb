@@ -20,6 +20,21 @@ get("/customers/new") do
   erb(:customers_form)
 end
 
+get("/animals/name") do
+  @animals = Animal.name_sort()
+  erb(:sort_name)
+end
+
+get("/animals/type") do
+  @animals = Animal.type_sort()
+  erb(:sort_type)
+end
+
+get("/animals/breed") do
+  @animals = Animal.breed_sort()
+  erb(:sort_breed)
+end
+
 post("/animals") do
   name = params.fetch("name")
   gender = params.fetch("gender")

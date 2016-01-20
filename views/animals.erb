@@ -4,11 +4,11 @@
 
   <ul>
     <% @animals.each() do |animal| %>
-        <%= animal.name() %>
-        <%= animal.gender() %>
-        <%= animal.admittance_date() %>
-        <%= animal.type() %>
-        <%= animal.breed() %>
+    <%= animal.fetch("name") %>
+    <%= animal.fetch("gender") %>
+    <%= animal.fetch("admittance_date") %>
+    <%= animal.fetch("type") %>
+    <%= animal.fetch("breed") %>
         <br>
     <% end %>
   </ul>
@@ -20,3 +20,7 @@
   </p>
 
   <% end %>
+
+  <a href="/animals/name">See Animals Sorted by Name</a>
+  <a href="/animals/type">See Animals Sorted by Type</a>
+  <a href="/animals/breed">See Animals Sorted by Breed</a>

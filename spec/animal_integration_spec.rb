@@ -27,3 +27,25 @@ describe("viewing all of the animals", {:type => :feature}) do
     expect(page).to have_content("Sherman")
   end
 end
+
+describe("viewing all of the customers", {:type => :feature}) do
+  it('allows a user to see a list of the customers') do
+    customer = Customer.new({:name => "Greg", :phone => "234234", :type_preference => "cat", :breed_preference => "Russian Blue", :id => 1})
+    customer.save()
+    visit('/')
+    click_link('View All Customers')
+    expect(page).to have_content("Greg")
+  end
+end
+
+describe("viewing animals sorted by name", {:type => :feature}) do
+  it('allows a user to see a list of animals sorted by name') do
+    animal = Animal.new({:name => "Sherman", :gender => "male", :admittance_date => "01/31/2015", :type => "dog", :breed => "Goldendoodle", :cust_id => 1})
+    animal.save()
+    visit('/')
+    click_link('View All Animals')
+    expect(page).to have_content("Currently Available")
+    click_link('See Animals Sorted by Name')
+    expect(page).to have_content("Sherman")
+  end
+end
